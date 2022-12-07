@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.send("get from the main page")
 })
 
-// This will create a new DB called 'twitterApp' in your local, if no existed DB called 'twitterApp'
+
 const mongoEndpoint = 'mongodb+srv://proj3:project3@webdevneu.ozpcdcj.mongodb.net/twitterApp?retryWrites=true&w=majority'; 
 mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
 
