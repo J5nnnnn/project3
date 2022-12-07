@@ -11,7 +11,9 @@ function App() {
         .then((res)=>{
             console.log("get successful!")
             setTest(res.data)
-        })
+        }).catch(
+          console.log("here???")
+        )
   }, [])
 
   console.log(test[0])
