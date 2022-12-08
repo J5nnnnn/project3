@@ -22,7 +22,7 @@ function App() {
     <div>
         <p> Project 3</p>
         <div>
-          id : {test[1] === undefined? null: test[1]._id}
+          id : {test[0] === undefined? null: test[0]._id}
         </div>
         <div>
           name: {test[0].content}
