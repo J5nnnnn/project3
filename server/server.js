@@ -25,6 +25,11 @@ mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to MongoDB:'));
 
+app.get('*', function (req, res) {
+
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+
+});
 
 app.listen(8000, ()=>{
     console.log("Starting server for project 3 ...")
