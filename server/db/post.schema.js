@@ -1,8 +1,14 @@
 const Schema = require('mongoose').Schema
 
 exports.PostSchema = new Schema({
-    content: String,
-    username: String
+    content: {
+        type: String,
+        require: true
+    },
+    username: {
+        type: String,
+        require: true
+    }
     },{
         timestamps: {
             createdAt: 'created',
