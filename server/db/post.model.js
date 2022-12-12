@@ -12,6 +12,13 @@ function getAllPost(){
     return PostModel.find().exec();
 }
 
+function getAllPostForUser(user){
+    return PostModel.find({
+        username: user
+    }).exec();
+}
+
+
 module.exports = {
     createPost,
     getAllPost,
