@@ -8,6 +8,7 @@ import {
   Link,
 } from "react-router-dom";
 import Welcome from './Welcome';
+import User from './User';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +16,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const reactRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Welcome />
+    element: <Welcome/>
+  },{
+    path: "/:username",
+    element: <User />
   }
 ])
 

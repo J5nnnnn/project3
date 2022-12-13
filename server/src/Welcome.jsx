@@ -1,4 +1,4 @@
-import './App.css';
+import './welcome.css';
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
@@ -41,9 +41,27 @@ export default function Welcome() {
   // rerender in the front page
 
   return (
-    <div>
-      <p> Project 3</p>
-      {showAllPost()}
-    </div>
+    <div className='layout'>
+      <div className='navbar'>
+        <div className='longer'>
+          <button className="button" >
+            Home
+          </button>
+        </div>
+        <button className="button" >
+          Log In
+        </button>
+        <button className="button" >
+          Sign Up
+        </button>
+
+      </div>
+
+      <div className='info_layout'>
+        <p> Project 3</p>
+        {showAllPost()}
+      </div>
+
+    </ div>
   );
 }

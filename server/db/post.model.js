@@ -23,4 +23,5 @@ function getAllPostForUser(user){
 module.exports = {
     createPost,
     getAllPost,
+    getAllPostForUser,
 }
