@@ -9,13 +9,14 @@ function createPost(post){
 }
 
 function getAllPost(){
-    return PostModel.find().exec();
+    return PostModel.find().sort({created: -1}).exec();
 }
 
+// may need to updated the sorting mechamisum
 function getAllPostForUser(user){
     return PostModel.find({
         username: user
-    }).exec();
+    }).sort({updated: -1}).exec();
 }
 
 

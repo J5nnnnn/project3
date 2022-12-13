@@ -30,12 +30,10 @@ router.get('/:user', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const test = {
-    content: 'tested content',
-    username: 'admin',
-  };
 
-  return PostModel.createPost(test)
+  const body = req.body;
+
+  return PostModel.createPost(body)
     .then((data) => {
       res.send(data);
     })

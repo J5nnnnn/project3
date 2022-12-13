@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
+
 export default function Welcome() {
   const [test, setTest] = useState([{}]);
 
@@ -14,14 +15,35 @@ export default function Welcome() {
       .catch(console.log('here???'));
   }, []);
 
-  console.log(test[0]);
+  console.log(test);
+
+  function showAllPost(){
+    const posts = [];
+    test.forEach((data) => {
+      posts.push(createPostTag(data._id, data.content, data.username, data.created, data.updated))
+    })
+    return posts;
+  }
+
+  function createPostTag(id, content, username, create, update){
+
+    return (
+    <div>
+      <div> id: {id}</div>
+      <div>content: {content}</div>
+      <div>user: {username}</div>
+      <div>create: {create}</div>
+      <div>update: {update}</div>
+    </div>);
+  }
+
+  // if I post something on the backend using postman, could that also trigger a
+  // rerender in the front page
 
   return (
     <div>
       <p> Project 3</p>
-      <div>id : {test[0] === undefined ? null : test[0]._id}</div>
-      <div>name: {test[0].content}</div>
-      <div>user: {test[0].username}</div>
+      {showAllPost()}
     </div>
   );
 }
