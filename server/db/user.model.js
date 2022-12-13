@@ -1,22 +1,30 @@
 const mongoose = require('mongoose');
 
-const UserSchema = require('./user.schema');
+const UserSchema = require('./user.schema').UserSchema;
 
-const UserModal = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
 
 function register(user) {
-  return UserModal.create(user);
+  return UserModel.create(user);
 }
 
 function userInfo(name) {
-  return UserModal.findOne({ username: name });
+  return UserModel.findOne({ username: name });
 }
 
 function updateDescription(name, descrip) {
   const filter = { username: name };
   const update = { description: descrip };
 
-  return UserModal.findOneAndUpdate(filter, update);
+  return UserModel.findOneAndUpdate(filter, update);
+}
+
+// need encryption!!!
+function updatePassword(name, secret) {
+  const filter = {username: name};
+  const update = {password: secret};
+
+  return UserModel.findOneAndUpdate(filter, update);
 }
 
 module.exports = {
