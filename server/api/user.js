@@ -2,11 +2,13 @@ const express = require('express');
 
 const UserModel = require('../db/user.model');
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
 router.post('/register', (req, res) => {
     const body = req.body;
+    body.password = bcrypt.hashSync(body.password, 10);
 
     return UserModel.register(body)
         .then((data) => {
@@ -26,5 +28,7 @@ router.post('/register', (req, res) => {
             return res.send("Error: User cannot be created" + err);
         });
 });
+
+
 
 module.exports = router;

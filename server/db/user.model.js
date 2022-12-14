@@ -31,4 +31,5 @@ module.exports = {
   register,
   userInfo,
   updateDescription,
+  updatePassword,
 };
