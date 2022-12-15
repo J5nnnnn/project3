@@ -1,7 +1,7 @@
 import './welcome.css';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import Axios from 'axios';
+import axios from 'axios';
 import Layout from './Layout';
 
 export default function User() {
@@ -9,10 +9,11 @@ export default function User() {
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
 
     useEffect(()=>{
         const username = params.username;
-        Axios.get("http://localhost:8000/post/" + username)
+        axios.get("http://localhost:8000/post/" + username)
             .then((res)=>{
                 console.log('get successful!');
                 setPosts(res.data);
@@ -24,6 +25,13 @@ export default function User() {
             .finally(function() {
                 console.log('loading')
                 setIsLoading(false);
+            })
+
+        axios.get('http://localhost:8000/user/isLoggedIn')
+            .then((res) => {
+              setIsLogin(true);
+            }).catch((err) => {
+              console.log("no one logged in yet!")
             })
     },[])
 
@@ -37,6 +45,6 @@ export default function User() {
 
 
     return (
-      <Layout value={{posts}}/>
+      <Layout value={{posts, isLogin, setIsLogin}}/>
     )
 }

@@ -67,6 +67,11 @@
     cursor: pointer;
 }
 
+.error_mesg{
+    font-size: 8px;
+    color: red;
+}
+
 button{
     cursor: pointer;
     transition: 0.2s;

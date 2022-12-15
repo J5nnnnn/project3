@@ -17,6 +17,11 @@ app.use(express.urlencoded({extended: true}));
 app.use('/post', PostRoute);
 app.use('/user', UserRoute);
 
+// error handling middleware
+// app.use((err, req, res, next) => {
+//     console.log(err)
+//     res.status(400).send("woow")
+// })
 
 const mongoEndpoint = 'mongodb+srv://proj3:project3@webdevneu.ozpcdcj.mongodb.net/twitterApp?retryWrites=true&w=majority'; 
 mongoose.connect(mongoEndpoint, { useNewUrlParser: true });

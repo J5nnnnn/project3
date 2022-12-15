@@ -9,6 +9,7 @@ export default function Welcome() {
   const [posts, setPosts] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:8000/post')
@@ -24,6 +25,13 @@ export default function Welcome() {
         console.log('loading')
         setIsLoading(false);
     })
+
+    axios.get('http://localhost:8000/user/isLoggedIn')
+      .then((res) => {
+        setIsLogin(true);
+      }).catch((err) => {
+        console.log("no one logged in yet!")
+      })
   }, []);
 
   if (isLoading) {
@@ -35,6 +43,6 @@ export default function Welcome() {
   }
 
   return (
-   <Layout value={{posts}}/>
+   <Layout value={{posts, isLogin, setIsLogin}}/>
   );
 }

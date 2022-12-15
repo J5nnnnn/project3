@@ -5,7 +5,6 @@ const UserSchema = require('./user.schema').UserSchema;
 const UserModel = mongoose.model('User', UserSchema);
 
 function register(user) {
-  console.log(user)
   return UserModel.create(user);
 }
 
