@@ -5,10 +5,11 @@ const UserSchema = require('./user.schema').UserSchema;
 const UserModel = mongoose.model('User', UserSchema);
 
 function register(user) {
+  console.log(user)
   return UserModel.create(user);
 }
 
-function userInfo(name) {
+function getUserByName(name) {
   return UserModel.findOne({ username: name });
 }
 
@@ -18,6 +19,7 @@ function updateDescription(name, descrip) {
 
   return UserModel.findOneAndUpdate(filter, update);
 }
+
 
 // need encryption!!!
 function updatePassword(name, secret) {
@@ -29,7 +31,7 @@ function updatePassword(name, secret) {
 
 module.exports = {
   register,
-  userInfo,
+  getUserByName,
   updateDescription,
   updatePassword,
 };

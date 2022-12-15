@@ -9,7 +9,7 @@ exports.UserSchema = new Schema({
     password: {
         type: String,
         required: true,
-        minLength: 8,
+        minLength: true
     },
     description: String,
     },{

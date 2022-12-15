@@ -57,6 +57,16 @@
     background-color: #f7f3f3;
 }
 
+.name_display{
+    font-size: large;
+    font-weight: bolder;
+    display: inline;
+}
+
+.name_display:hover{
+    cursor: pointer;
+}
+
 button{
     cursor: pointer;
     transition: 0.2s;

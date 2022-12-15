@@ -1,7 +1,7 @@
 import './welcome.css';
 import './modal.css';
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import Layout from './Layout';
 
 
@@ -11,7 +11,7 @@ export default function Welcome() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    Axios.get('http://localhost:8000/post')
+    axios.get('http://localhost:8000/post')
       .then((res) => {
         console.log('get successful!');
         setPosts(res.data);

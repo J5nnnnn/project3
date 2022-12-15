@@ -25,7 +25,9 @@ export default function Layout(props) {
       <div>
         <div> id: {id}</div>
         <div>content: {content}</div>
-        <div>user: {username}</div>
+        <div className='name_display' onClick={() => onClick_visit_user(username)}>
+            @{username}
+        </div>
         <div>create: {create}</div>
         <div>update: {update}</div>
       </div>);
@@ -57,9 +59,13 @@ export default function Layout(props) {
     function updatePassword(event){
       setPassword(event.target.value);
     }
+
+    function onClick_visit_user(input_name){
+        navigate("/" + input_name);
+    }
   
     function createUser(){
-      Axios.post("http://localhost:8000/user/register",{
+      axios.post("http://localhost:8000/user/register",{
         username: name,
         password: password,
       })
@@ -69,7 +75,9 @@ export default function Layout(props) {
         setModal_register_success(!modal_register_success);
         // res.send("successful register!");
       })
-      .catch()
+      .catch((err) => {
+        console.log(err)
+      })
     }
 
     console.log(name + password)

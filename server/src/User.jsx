@@ -1,7 +1,7 @@
 import './welcome.css';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import axios from 'axios';
+import Axios from 'axios';
 import Layout from './Layout';
 
 export default function User() {
@@ -12,7 +12,7 @@ export default function User() {
 
     useEffect(()=>{
         const username = params.username;
-        axios.get("http://localhost:8000/post/" + username)
+        Axios.get("http://localhost:8000/post/" + username)
             .then((res)=>{
                 console.log('get successful!');
                 setPosts(res.data);
