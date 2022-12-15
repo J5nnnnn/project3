@@ -13,19 +13,7 @@ export default function User() {
 
     useEffect(()=>{
         const username = params.username;
-        axios.get("http://localhost:8000/post/" + username)
-            .then((res)=>{
-                console.log('get successful!');
-                setPosts(res.data);
-            })
-            .catch(function(error){ 
-                console.log('rejected!!!')
-                setIsError(true);
-            })
-            .finally(function() {
-                console.log('loading')
-                setIsLoading(false);
-            })
+        fetch_post_for_user(username);
 
         axios.get('http://localhost:8000/user/isLoggedIn')
             .then((res) => {
@@ -34,6 +22,22 @@ export default function User() {
               console.log("no one logged in yet!")
             })
     },[])
+
+    function fetch_post_for_user(username){
+        axios.get("http://localhost:8000/post/" + username)
+        .then((res)=>{
+            console.log('get successful!');
+            setPosts(res.data);
+        })
+        .catch(function(error){ 
+            console.log('rejected!!!')
+            setIsError(true);
+        })
+        .finally(function() {
+            console.log('loading')
+            setIsLoading(false);
+        })
+    }
 
     if (isLoading) {
         return (<div>Loading....</div>)
@@ -45,6 +49,6 @@ export default function User() {
 
 
     return (
-      <Layout value={{posts, isLogin, setIsLogin}}/>
+      <Layout value={{posts, isLogin, setIsLogin, fetch_post_for_user}}/>
     )
 }

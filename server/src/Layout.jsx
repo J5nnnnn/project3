@@ -7,12 +7,13 @@ import { useNavigate} from 'react-router-dom';
 export default function Layout(props) {
     const navigate = useNavigate();
 
-    const posts = props.value.posts;
-    const isLogin = props.value.isLogin;
-    const setIsLogin = props.value.setIsLogin;
-  
-    console.log(posts)
+    const app_state = props.value;
 
+    const posts = app_state.posts;
+    const isLogin = app_state.isLogin;
+    const setIsLogin = app_state.setIsLogin;
+    const fetch = (app_state.fetch_all_post !== undefined)? app_state.fetch_all_post : app_state.fetch_post_for_user;
+  
     function showAllPost(){
       const postlist = [];
       posts.forEach((data) => {
@@ -38,11 +39,17 @@ export default function Layout(props) {
     const [modal, setModal] = useState(false);
     const [modal_register_success, setModal_register_success] = useState(false);
     const [modal_login, setModal_login] = useState(false);
+    const [modal_post, setModal_post] = useState(false);
   
     const [name, setName] = useState('');
+    const [content, setContent] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
   
+    function onClick_Post(){
+      setModal_post(!modal_post);
+    }
+
     function onClick_reg_success(){
       setModal_register_success(!modal_register_success);
       setName('');
@@ -61,6 +68,10 @@ export default function Layout(props) {
     function onClick_login(){
         setModal_login(!modal_login);
         setPassword("");
+    }
+
+    function update_post_content(event){
+      setContent(event.target.value);
     }
   
     function updateName(event){
@@ -115,6 +126,21 @@ export default function Layout(props) {
       })
     }
 
+    function make_new_post(){
+      axios.post("http://localhost:8000/post", {
+        content: content,
+        username: name,
+      })
+      .then(() => {
+        setModal_post(!modal_post);
+        setContent("");
+        fetch()
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+
     function display_error_register(err){
         setError(err);
     }
@@ -128,12 +154,17 @@ export default function Layout(props) {
         if(isLogin){
             return (
                 <>
+                    <button className="button post" onClick={onClick_Post}>
+                        +
+                    </button>
+                    
+                    <div className='name_display' onClick={() => onClick_visit_user(name)} >
+                        @{name}
+                    </div>      
                     <button className="button" onClick={logout}>
                         Log Out
                     </button>
-                    <div className='name_display' onClick={() => onClick_visit_user(name)} >
-                        @{name}
-                    </div>               
+         
                 </>
             )
 
@@ -153,6 +184,29 @@ export default function Layout(props) {
   
     return (
       <>
+        {modal_post && (
+          <div className="modal">
+            <div onClick={onClick_Post} className="overlay"></div>
+            <div className="modal-content">
+              <h2>Post A New Update!</h2>
+              <div className='error_mesg'>
+                {error}
+              </div>
+              <label>Content: </label>
+              <div>
+                <textarea className='post' type="text" onInput={update_post_content}></textarea>
+              </div>
+              <button className="close-modal" onClick={onClick_Post}>
+                CLOSE
+              </button>
+              <button className="mid-modal" onClick={make_new_post}>
+                Post
+              </button>
+            </div>
+          </div>
+        )}
+
+
         {modal && (
           <div className="modal">
             <div onClick={onClick_register} className="overlay"></div>

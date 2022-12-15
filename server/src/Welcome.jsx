@@ -12,6 +12,17 @@ export default function Welcome() {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
+    fetch_all_post()
+
+    axios.get('http://localhost:8000/user/isLoggedIn')
+      .then((res) => {
+        setIsLogin(true);
+      }).catch((err) => {
+        console.log("no one logged in yet!")
+      })
+  }, []);
+
+  function fetch_all_post(){
     axios.get('http://localhost:8000/post')
       .then((res) => {
         console.log('get successful!');
@@ -25,14 +36,7 @@ export default function Welcome() {
         console.log('loading')
         setIsLoading(false);
     })
-
-    axios.get('http://localhost:8000/user/isLoggedIn')
-      .then((res) => {
-        setIsLogin(true);
-      }).catch((err) => {
-        console.log("no one logged in yet!")
-      })
-  }, []);
+  }
 
   if (isLoading) {
     return (<div>Loading....</div>)
@@ -43,6 +47,6 @@ export default function Welcome() {
   }
 
   return (
-   <Layout value={{posts, isLogin, setIsLogin}}/>
+   <Layout value={{posts, isLogin, setIsLogin, fetch_all_post}}/>
   );
 }

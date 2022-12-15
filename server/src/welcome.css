@@ -57,6 +57,26 @@
     background-color: #f7f3f3;
 }
 
+.post{
+    height: 60px;
+    width: 260px;
+    overflow-wrap: break-word;
+}
+
+.button.post{
+    height: 30px;
+    border-radius: 1.5em;
+    align-content: center;
+    letter-spacing: 0.05em;
+    margin: 15px;
+    font-size: 20px;
+    font-weight: bolder;
+    display: block;
+    width: 40px;
+    border: 0;
+    background-color: #f7f3f3;
+}
+
 .name_display{
     font-size: large;
     font-weight: bolder;
