@@ -107,8 +107,9 @@ export default function Layout(props) {
             password: password,
         }).then((res) => {
             console.log("You logged in! " + name)
-            console.log(res.headers);
+            console.log(res);
             setIsLogin(true);
+            setLoginName(res.data.username);
             setModal_login(!modal_login);
         }
         ).catch((err) => {
