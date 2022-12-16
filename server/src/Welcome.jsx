@@ -6,20 +6,21 @@ import Layout from './Layout';
 
 
 export default function Welcome() {
-  const [posts, setPosts] = useState([{}]);
+  const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     fetch_all_post()
 
-    axios.get('http://localhost:8000/user/isLoggedIn')
-      .then((res) => {
-        setIsLogin(true);
-      }).catch((err) => {
-        console.log("no one logged in yet!")
-      })
+    // axios.get('http://localhost:8000/user/isLoggedIn')
+    //   .then((res) => {
+    //     setIsLogin(true);
+    //     console.log("some one logged in!!!!")
+    //   }).catch((err) => {
+    //     console.log("no one logged in yet!")
+    //   })
   }, []);
 
   function fetch_all_post(){
@@ -47,6 +48,6 @@ export default function Welcome() {
   }
 
   return (
-   <Layout value={{posts, isLogin, setIsLogin, fetch_all_post}}/>
+   <Layout value={{posts, fetch_all_post}}/>
   );
 }

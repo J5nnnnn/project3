@@ -52,8 +52,8 @@ router.post('/register', (req, res) => {
 });
 
 
-router.post('/authenticate', (req, res, next) => {
-    console.dir(req.body);
+router.post('/authenticate', (req, res) => {
+    // console.dir(req.body);
     UserModel.getUserByName(req.body.username)
         .then((user) => {
             if (bcrypt.compareSync(req.body.password, user.password)){

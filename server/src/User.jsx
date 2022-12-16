@@ -9,18 +9,19 @@ export default function User() {
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
+    // const [isLogin, setIsLogin] = useState(false);
 
     useEffect(()=>{
         const username = params.username;
         fetch_post_for_user(username);
 
-        axios.get('http://localhost:8000/user/isLoggedIn')
-            .then((res) => {
-              setIsLogin(true);
-            }).catch((err) => {
-              console.log("no one logged in yet!")
-            })
+        // axios.get('http://localhost:8000/user/isLoggedIn')
+        //     .then((res) => {
+        //       setIsLogin(true);
+        //       console.log("some one logged in!!!!")
+        //     }).catch((err) => {
+        //       console.log("no one logged in yet!")
+        //     })
     },[])
 
     function fetch_post_for_user(username){
@@ -49,6 +50,6 @@ export default function User() {
 
 
     return (
-      <Layout value={{posts, isLogin, setIsLogin, fetch_post_for_user}}/>
+      <Layout value={{posts, fetch_post_for_user}}/>
     )
 }

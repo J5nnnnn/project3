@@ -10,10 +10,23 @@ export default function Layout(props) {
     const app_state = props.value;
 
     const posts = app_state.posts;
-    const isLogin = app_state.isLogin;
-    const setIsLogin = app_state.setIsLogin;
+    // const isLogin = app_state.isLogin;
+    // const setIsLogin = app_state.setIsLogin;
     const fetch = (app_state.fetch_all_post !== undefined)? app_state.fetch_all_post : app_state.fetch_post_for_user;
   
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() => {
+      axios.get('http://localhost:8000/user/isLoggedIn')
+      .then((res) => {
+        setIsLogin(true);
+        console.log("some one logged in!!!!")
+      }).catch((err) => {
+        console.log("no one logged in yet!")
+      })
+    }, [])
+
+
     function showAllPost(){
       const postlist = [];
       posts.forEach((data) => {
@@ -90,8 +103,9 @@ export default function Layout(props) {
         axios.post("http://localhost:8000/user/authenticate", {
             username: name,
             password: password,
-        }).then(() => {
+        }).then((res) => {
             console.log("You logged in! " + name)
+            console.log(res.headers);
             setIsLogin(true);
             setModal_login(!modal_login);
         }
