@@ -2,7 +2,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const path = require('path');
 const PostRoute = require('./api/post');
 const UserRoute = require('./api/user');
 
@@ -30,9 +30,10 @@ mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to MongoDB:'));
 
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    // res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 

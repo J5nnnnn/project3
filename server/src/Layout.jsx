@@ -8,19 +8,21 @@ export default function Layout(props) {
     const navigate = useNavigate();
 
     const app_state = props.value;
-
+    const path_name = app_state.username;
     const posts = app_state.posts;
     // const isLogin = app_state.isLogin;
     // const setIsLogin = app_state.setIsLogin;
     const fetch = (app_state.fetch_all_post !== undefined)? app_state.fetch_all_post : app_state.fetch_post_for_user;
   
     const [isLogin, setIsLogin] = useState(false);
+    const [login_name, setLoginName] = useState("");
 
     useEffect(() => {
-      axios.get('http://localhost:8000/user/isLoggedIn')
+      axios.get('/user/isLoggedIn')
       .then((res) => {
         setIsLogin(true);
-        console.log("some one logged in!!!!")
+        setLoginName(res.data);
+        console.log(login_name)
       }).catch((err) => {
         console.log("no one logged in yet!")
       })
@@ -100,7 +102,7 @@ export default function Layout(props) {
     }
 
     function login(){
-        axios.post("http://localhost:8000/user/authenticate", {
+        axios.post("/user/authenticate", {
             username: name,
             password: password,
         }).then((res) => {
@@ -115,14 +117,14 @@ export default function Layout(props) {
     }
 
     function logout(){
-        axios.post("http://localhost:8000/user/logOut")
+        axios.post("/user/logOut")
             .then(() => {
                 location.reload();
             })
     }
   
     function createUser(){
-      axios.post("http://localhost:8000/user/register",{
+      axios.post("/user/register",{
         username: name,
         password: password,
       })
@@ -141,7 +143,7 @@ export default function Layout(props) {
     }
 
     function make_new_post(){
-      axios.post("http://localhost:8000/post", {
+      axios.post("/post", {
         content: content,
         username: name,
       })
@@ -172,8 +174,8 @@ export default function Layout(props) {
                         +
                     </button>
                     
-                    <div className='name_display' onClick={() => onClick_visit_user(name)} >
-                        @{name}
+                    <div className='name_display' onClick={() => onClick_visit_user(login_name)} >
+                        @{login_name}
                     </div>      
                     <button className="button" onClick={logout}>
                         Log Out

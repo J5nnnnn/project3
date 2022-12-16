@@ -86,9 +86,8 @@ router.get("/isLoggedIn", (req, res) => {
             return res.status(400).send("Invalid token")
         } else {
             const name = decoded.username;
-            console.log(name);
             
-            return res.status(200).send("All logged in!")
+            return res.status(200).send(name)
         }
     })
 })

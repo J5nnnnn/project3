@@ -24,7 +24,7 @@ export default function Welcome() {
   }, []);
 
   function fetch_all_post(){
-    axios.get('http://localhost:8000/post')
+    axios.get('/post')
       .then((res) => {
         console.log('get successful!');
         setPosts(res.data);

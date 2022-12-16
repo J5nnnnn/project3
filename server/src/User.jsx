@@ -10,9 +10,10 @@ export default function User() {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     // const [isLogin, setIsLogin] = useState(false);
+    const username = params.username;
 
     useEffect(()=>{
-        const username = params.username;
+
         fetch_post_for_user(username);
 
         // axios.get('http://localhost:8000/user/isLoggedIn')
@@ -25,7 +26,7 @@ export default function User() {
     },[])
 
     function fetch_post_for_user(username){
-        axios.get("http://localhost:8000/post/" + username)
+        axios.get("/post/" + username)
         .then((res)=>{
             console.log('get successful!');
             setPosts(res.data);
@@ -45,11 +46,11 @@ export default function User() {
     }
 
     if(isError) {
-        return (<div>Could not find User with username: {params.username}</div>)
+        return (<div>Could not find User with username: {username}</div>)
     }
 
 
     return (
-      <Layout value={{posts, fetch_post_for_user}}/>
+      <Layout value={{posts, fetch_post_for_user, username}}/>
     )
 }
