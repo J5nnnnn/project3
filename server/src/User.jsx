@@ -14,6 +14,7 @@ export default function User() {
 
     useEffect(()=>{
 
+
         fetch_post_for_user(username);
 
         // axios.get('http://localhost:8000/user/isLoggedIn')
@@ -28,7 +29,8 @@ export default function User() {
     function fetch_post_for_user(username){
         axios.get("/post/" + username)
         .then((res)=>{
-            console.log('get successful!');
+            console.log('get successful! ');
+            console.log(res)
             setPosts(res.data);
         })
         .catch(function(error){ 
@@ -48,7 +50,6 @@ export default function User() {
     if(isError) {
         return (<div>Could not find User with username: {username}</div>)
     }
-
 
     return (
       <Layout value={{posts, fetch_post_for_user, username}}/>

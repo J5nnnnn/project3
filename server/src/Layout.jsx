@@ -18,6 +18,8 @@ export default function Layout(props) {
     const [login_name, setLoginName] = useState("");
 
     useEffect(() => {
+      console.log("page loaded!!!")
+
       axios.get('/user/isLoggedIn')
       .then((res) => {
         setIsLogin(true);
@@ -31,6 +33,7 @@ export default function Layout(props) {
 
     function showAllPost(){
       const postlist = [];
+      console.log(posts);
       posts.forEach((data) => {
         postlist.push(createPostTag(data._id, data.content, data.username, data.created, data.updated))
       })
@@ -99,6 +102,7 @@ export default function Layout(props) {
 
     function onClick_visit_user(input_name){
         navigate("/" + input_name);
+        fetch(input_name)
     }
 
     function login(){
@@ -146,7 +150,7 @@ export default function Layout(props) {
     function make_new_post(){
       axios.post("/post", {
         content: content,
-        username: name,
+        username: login_name,
       })
       .then(() => {
         setModal_post(!modal_post);
