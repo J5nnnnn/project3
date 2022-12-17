@@ -9,18 +9,9 @@ export default function Welcome() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  // const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     fetch_all_post()
-
-    // axios.get('http://localhost:8000/user/isLoggedIn')
-    //   .then((res) => {
-    //     setIsLogin(true);
-    //     console.log("some one logged in!!!!")
-    //   }).catch((err) => {
-    //     console.log("no one logged in yet!")
-    //   })
   }, []);
 
   function fetch_all_post(){

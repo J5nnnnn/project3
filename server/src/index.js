@@ -4,8 +4,6 @@ import './index.css';
 import {
   createBrowserRouter,
   RouterProvider, 
-  Route,
-  Link,
 } from "react-router-dom";
 import Welcome from './Welcome';
 import User from './User';

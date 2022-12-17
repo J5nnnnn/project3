@@ -9,22 +9,13 @@ export default function User() {
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    // const [isLogin, setIsLogin] = useState(false);
     const [description_fetched, setDescription] = useState('');
     const username = params.username;
 
     useEffect(()=>{
 
-        console.log("trigger!")
         fetch_post_for_user(username);
         fetch_user_info(username);
-        // axios.get('http://localhost:8000/user/isLoggedIn')
-        //     .then((res) => {
-        //       setIsLogin(true);
-        //       console.log("some one logged in!!!!")
-        //     }).catch((err) => {
-        //       console.log("no one logged in yet!")
-        //     })
     },[])
 
     function fetch_user_info(username){
@@ -40,7 +31,6 @@ export default function User() {
         axios.get("/post/" + username)
         .then((res)=>{
             console.log('get successful! ');
-            console.log(res)
             setPosts(res.data);
         })
         .catch(function(error){ 

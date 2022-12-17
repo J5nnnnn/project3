@@ -6,11 +6,6 @@ const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
-// const MISS_USERNAME = 'Username is missing';
-// const MISS_PASSWORD = 'password is required';
-// const DUPLICATE_USERNAME = 'That username is taken';
-// const SHORT_PASSWORD = 'Password should be at least 8 in length';
-
 router.post('/register', (req, res) => {
     const body = req.body;
     if(body.password.length >= 8){
@@ -33,18 +28,6 @@ router.post('/register', (req, res) => {
             (err) => {
             const mesg = err.message;
             console.log("message: " + mesg)
-            // let code = 0;
-            // if(mesg === MISS_USERNAME){
-            //     code = 1;
-            // }else if(mesg === MISS_PASSWORD){
-            //     code = 2;
-            // }else if(mesg === DUPLICATE_USERNAME){
-            //     code = 3;
-            // }else if(mesg === SHORT_PASSWORD){
-            //     code = 4;
-            // }else{
-            //     // return res.status(422).send(err);
-            // }
             
             res.status(400);
             return res.send({error: mesg})}

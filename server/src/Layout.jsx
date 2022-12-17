@@ -12,30 +12,24 @@ export default function Layout(props) {
     const posts = app_state.posts;
     const description_fetch = app_state.description_fetched;
     const update_descrip_display = app_state.setDescription;
-    // const isLogin = app_state.isLogin;
-    // const setIsLogin = app_state.setIsLogin;
     const fetch = (app_state.fetch_all_post !== undefined)? app_state.fetch_all_post : app_state.fetch_post_for_user;
     const fetch_descrip = app_state.fetch_user_info;
     const [isLogin, setIsLogin] = useState(false);
     const [login_name, setLoginName] = useState("");
 
     useEffect(() => {
-      console.log("page loaded!!!")
-
       axios.get('/user/isLoggedIn')
       .then((res) => {
         setIsLogin(true);
         setLoginName(res.data);
-        console.log(login_name)
       }).catch((err) => {
-        console.log("no one logged in yet!")
+        console.log(err)
       })
     }, [])
 
 
     function showAllPost(){
       const postlist = [];
-      console.log(posts);
       posts.forEach((data) => {
         postlist.push(createPostTag(data._id, data.content, data.username, data.created, data.updated))
       })
@@ -157,7 +151,6 @@ export default function Layout(props) {
             password: password,
         }).then((res) => {
             console.log("You logged in! " + name)
-            console.log(res);
             setIsLogin(true);
             setLoginName(res.data.username);
             setModal_login(!modal_login);
@@ -185,7 +178,6 @@ export default function Layout(props) {
         setPassword("");
         setModal_register_success(!modal_register_success);
         setError("");
-        // res.send("successful register!");
       })
       .catch((err) => {
         const mesg = err.response.data.error;
@@ -244,7 +236,6 @@ export default function Layout(props) {
         content: content
       })
         .then((res) => {
-          console.log(res)
           fetch(login_name);
           setContentModal(!modal_content_update)
         })
@@ -257,10 +248,6 @@ export default function Layout(props) {
         setError(err);
     }
 
-    console.log(name + password)
-  
-    // if I post something on the backend using postman, could that also trigger a
-    // rerender in the front page
   
     function nav_bar_change(){
         if(isLogin){
@@ -319,7 +306,6 @@ export default function Layout(props) {
       }
     }
   
-    console.log("description: "+description_fetch)
     return (
       <>
         {modal_content_update && (
@@ -465,12 +451,6 @@ export default function Layout(props) {
               </button>
             </div>
             {nav_bar_change()}
-            {/* <button className="button" onClick={onClick_login}>
-              Log In
-            </button>
-            <button className="button" onClick={onClick_register} >
-              Sign Up
-            </button> */}
           </div>
   
           <div className='info_layout'>
