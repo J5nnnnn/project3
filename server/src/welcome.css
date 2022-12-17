@@ -77,6 +77,28 @@
     background-color: #f7f3f3;
 }
 
+.button.post:hover{
+    background-color: rgb(207, 210, 212);
+}
+
+.button.delete{
+    height: 30px;
+    border-radius: 1.5em;
+    align-content: center;
+    letter-spacing: 0.05em;
+    margin: 2px 10px;
+    font-size: 20px;
+    font-weight: bolder;
+    width: 40px;
+    display:inline;
+    border: 0;
+    background-color: #f7f3f3;
+}
+
+.button.delete:hover{
+    background-color: rgb(207, 210, 212);
+}
+
 .name_display{
     font-size: large;
     font-weight: bolder;

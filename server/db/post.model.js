@@ -19,9 +19,24 @@ function getAllPostForUser(user){
     }).sort({updated: -1}).exec();
 }
 
+function deletePostById(id){
+    return PostModel.deleteOne({
+        _id: id
+    });
+}
+
+function updatePostById(id, contents){
+
+    const filter = { _id: id };
+    const update = { content: contents };
+
+    return PostModel.findOneAndUpdate(filter, update);
+}
 
 module.exports = {
     createPost,
     getAllPost,
     getAllPostForUser,
+    deletePostById,
+    updatePostById,
 }

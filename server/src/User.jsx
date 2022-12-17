@@ -10,13 +10,14 @@ export default function User() {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     // const [isLogin, setIsLogin] = useState(false);
+    const [description_fetched, setDescription] = useState('');
     const username = params.username;
 
     useEffect(()=>{
 
-
+        console.log("trigger!")
         fetch_post_for_user(username);
-
+        fetch_user_info(username);
         // axios.get('http://localhost:8000/user/isLoggedIn')
         //     .then((res) => {
         //       setIsLogin(true);
@@ -25,6 +26,15 @@ export default function User() {
         //       console.log("no one logged in yet!")
         //     })
     },[])
+
+    function fetch_user_info(username){
+        axios.get("/user/" + username)
+            .then((res) => {
+                setDescription(res.data.description);
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
 
     function fetch_post_for_user(username){
         axios.get("/post/" + username)
@@ -52,6 +62,6 @@ export default function User() {
     }
 
     return (
-      <Layout value={{posts, fetch_post_for_user, username}}/>
+      <Layout value={{posts, fetch_post_for_user, username, description_fetched, setDescription, fetch_user_info}}/>
     )
 }

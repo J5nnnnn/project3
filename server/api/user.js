@@ -98,6 +98,33 @@ router.post('/logOut', (req, res) => {
     }).send("Successfully log out")
 })
 
+router.get('/:user', (req, res) => {
+    const user = req.params.user;
+
+    return UserModel.getUserByName(user)
+        .then((data) => {
+            res.status(200).send(data)
+        })
+        .catch((err) => {
+            res.status(400);
+            res.send(err);
+        })
+})
+
+router.post('/updateDescription', (req, res) => {
+    const body = req.body;
+
+    return UserModel.updateDescription(body.username, body.description)
+        .then((data) => {
+            res.status(200).send(data)
+        })
+        .catch((err) => {
+            res.status(400);
+            res.send(err)
+        })
+})
+
+
 
 
 module.exports = router;
